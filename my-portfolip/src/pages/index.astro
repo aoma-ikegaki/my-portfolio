@@ -5,22 +5,54 @@ import Layout from '../layouts/Layout.astro';
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 <Layout title="My Portfolio">
-	<main class="max-w-3xl mx-auto px-6 py-20">
-		<section class="text-center">
-			<h1 class="text-5xl font-black tracking-tight text-slate-900">
-				aoma </span>
-			</h1>
-			<p class="mt-2">徳島大学理工学部理工学科光システムコース 2年</p>
-		</section>
+    <main class="min-h-screen bg-gradient-to-br from-blue-200 to-green-200 px-6 py-20 font-sans text-slate-800">
+        <div class="max-w-3xl mx-auto space-y-12">
+            
+            <!-- 自己紹介カード -->
+            <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
+                <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-4">Self Introduction</h2>
+                <h1 class="text-4xl font-black text-slate-900 mb-4">aoma ikegaki</h1>
+                <p class="leading-relaxed">
+                    徳島大学 理工学部 理工学科 光システムコース 2年
+                </p>
+            </section>
 
-		<section class="mt-20">
-			<h2 class="text-2xl font-bold border-b-2 border-slate-100 pb-2">Projects</h2>
-			<div class="grid gap-6 mt-8">
-				<div class="p-6 rounded-2xl bg-slate-50 hover:bg-slate-100 transition-colors">
-					<h3 class="font-bold">Project Name</h3>
-					<p class="text-sm text-slate-500 mt-2">Astro / Tailwind CSS / Vercel</p>
-				</div>
-			</div>
-		</section>
-	</main>
+            <!-- タイムライン (経歴) -->
+            <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
+                <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-6">Timeline</h2>
+                <div class="space-y-8">
+                    <!-- 各項目 -->
+                    <div class="flex gap-4">
+                        <span class="text-sm font-mono text-slate-400 pt-1">2024.04 - now</span>
+                        <div>
+                            <h3 class="font-bold underline decoration-slate-200 underline-offset-4">徳島大学理工学部理工学科光システムコース</h3>
+                            <p class="text-sm text-slate-500 mt-2 italic">-</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 成果物 (Projects) -->
+            <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
+                <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-6">Projects</h2>
+                <div class="grid gap-6">
+                    <div class="group">
+                        <h3 class="font-bold group-hover:text-blue-500 transition-colors">Owe Manager</h3>
+                        <p class="text-sm text-slate-500 mt-1">使用技術: TypeScript, Next.js, Hono, Cloudflare D1, Drizzle, Cloudflare Workers</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 記事 (Articles) -->
+            <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
+                <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-6">Articles</h2>
+                <ul class="list-disc list-inside space-y-3">
+                    <li>
+                        <a href="#" class="text-sm hover:underline text-slate-600 italic">記事１</a>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
 </Layout>
