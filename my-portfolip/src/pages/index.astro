@@ -7,11 +7,10 @@ const projects = [
         title: "Owe Manager",
         tech: ["TypeScript", "Next.js", "Hono", "Cloudflare D1"],
         description: "借金の管理をもっとスマートに。シンプルなインターフェースで日々の貸し借りを可視化します。",
-        details: "大学生活での小さな貸し借りをストレスなく管理するために制作しました。バックエンドにはCloudflare WorkersとHonoを採用し、エッジでの高速なレスポンスを実現。UIはNext.jsとTailwind CSSでモダンかつ直感的に仕上げました。",
+        details: "大学生活での小さな貸し借りをストレスなく管理するために制作した「Owe Manager」。「誰に、いくら、いつまでに」返すべきかを明確化し、現在の合計未返済額を一目で把握できます。バックエンドにはCloudflare D1とHonoを採用し、エッジでの高速なレスポンスを実現しています。",
+        github: "https://github.com/aoma-ikegaki/owe-manager",
         images: [
-            "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop"
+            "/owe-manager.png"
         ]
     },
     {
@@ -19,10 +18,10 @@ const projects = [
         title: "Smart Kanji",
         tech: ["Python", "Fast API", "TypeScript", "React", "MySQL"],
         description: "幹事の「めんどくさい」をゼロに。日程もお店も、LINEで完結。",
-        details: "自己紹介、経歴、プロジェクト、記事などをまとめたシングルページアプリケーションです。Astro 5を採用することで、静的なコンテンツの配信速度を極限まで高めつつ、必要な部分だけインタラクティブな要素を追加しています。",
+        details: "ハッカソンで開発した、幹事のためのLINEボット「Smart 幹事」。ユーザーはLINE上で日程調整やお店選びを行うだけで、幹事の仕事が完了します。バックエンドはPythonとFast APIで構築し、フロントエンドはReactで実装。チーム11 PolyTechsとして開発しました。",
+        github: "https://github.com/have4blast/schedule-coordinator-bot",
         images: [
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop"
+            "/smart-kanji.png"
         ]
     },
 
@@ -103,7 +102,7 @@ const timeline = [
                 
                 <div class="grid gap-10">
                     {projects.map((project) => (
-                        <button 
+                        <div 
                             class="project-card group flex flex-col md:flex-row gap-6 text-left w-full cursor-pointer hover:bg-white/40 p-4 -m-4 rounded-2xl transition-all"
                             data-details={JSON.stringify(project)}
                         >
@@ -115,8 +114,19 @@ const timeline = [
                                 />
                             </div>
                             <div class="flex-1">
-                                <h3 class="font-bold group-hover:text-blue-500 transition-colors text-xl">
+                                <h3 class="font-bold group-hover:text-blue-500 transition-colors text-xl flex items-center gap-2">
                                     {project.title}
+                                    <a 
+                                        href={project.github} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="text-slate-400 hover:text-slate-900 transition-colors p-1"
+                                        onclick="event.stopPropagation()"
+                                    >
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                                        </svg>
+                                    </a>
                                 </h3>
                                 <div class="flex flex-wrap gap-2 mt-2">
                                     {project.tech.map(tech => (
@@ -130,7 +140,7 @@ const timeline = [
                                     Read Details →
                                 </span>
                             </div>
-                        </button>
+                        </div>
                     ))}
                 </div>
             </section>
@@ -195,7 +205,7 @@ const timeline = [
                             ${data.details}
                         </p>
                         <div class="mt-8 flex gap-4">
-                            <button class="flex-1 bg-slate-900 text-white rounded-xl py-3 font-bold hover:bg-slate-800 transition-colors">Visit Project</button>
+                            <a href="${data.github}" target="_blank" rel="noopener noreferrer" class="flex-1 bg-slate-900 text-white rounded-xl py-3 font-bold hover:bg-slate-800 transition-colors text-center">GitHub を見る</a>
                         </div>
                     </div>
                 `;
