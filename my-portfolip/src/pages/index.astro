@@ -1,8 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const projects = [
+    {
+        id: "owe-manager",
+        title: "Owe Manager",
+        tech: ["TypeScript", "Next.js", "Hono", "Cloudflare D1"],
+        description: "借金の管理をもっとスマートに。シンプルなインターフェースで日々の貸し借りを可視化します。",
+        details: "大学生活での小さな貸し借りをストレスなく管理するために制作しました。バックエンドにはCloudflare WorkersとHonoを採用し、エッジでの高速なレスポンスを実現。UIはNext.jsとTailwind CSSでモダンかつ直感的に仕上げました。",
+        images: [
+            "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop"
+        ]
+    },
+    {
+        id: "Smart Kanji",
+        title: "Smart Kanji",
+        tech: ["Python", "Fast API", "TypeScript", "React", "MySQL"],
+        description: "幹事の「めんどくさい」をゼロに。日程もお店も、LINEで完結。",
+        details: "自己紹介、経歴、プロジェクト、記事などをまとめたシングルページアプリケーションです。Astro 5を採用することで、静的なコンテンツの配信速度を極限まで高めつつ、必要な部分だけインタラクティブな要素を追加しています。",
+        images: [
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop"
+        ]
+    },
+
+];
+
+
+const timeline = [
+    {
+        period: "2025.12 - 2026.01",
+        title: "サポーターズ主催 ハッカソン 努力賞",
+        description: "サポーターズ主催のハッカソンに参加し、努力賞を受賞しました。"
+    },
+    {
+        period: "2024.04 - now",
+        title: "徳島大学 理工学部 理工学科 光システムコース",
+        description: "大学2年。光工学と情報工学の基礎を学んでいます。"
+    },
+];
 ---
 <Layout title="My Portfolio">
     <main class="min-h-screen bg-gradient-to-br from-blue-200 to-green-200 px-6 py-20 font-sans text-slate-800">
@@ -10,38 +48,106 @@ import Layout from '../layouts/Layout.astro';
             
             <!-- 自己紹介カード -->
             <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
-                <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-4">Self Introduction</h2>
-                <h1 class="text-4xl font-black text-slate-900 mb-4">aoma ikegaki</h1>
-                <p class="leading-relaxed">
-                    徳島大学 理工学部 理工学科 光システムコース 2年
-                </p>
+                <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+                    <div>
+                        <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-4">Self Introduction</h2>
+                        <h1 class="text-4xl font-black text-slate-900 mb-4">aoma ikegaki</h1>
+                        <p class="leading-relaxed text-slate-600">
+                            徳島大学 理工学部 理工学科 光システムコース 2年
+                        </p>
+                        <div class="mt-6 flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <a href="mailto:aoma8270@gmail.com" class="text-sm font-medium">aoma8270@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/aoma-ikegaki" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all text-slate-600 hover:text-slate-900" title="GitHub">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="https://x.com/aoma4eqn" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all text-slate-600 hover:text-black" title="X">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.292 19.49h2.039L6.486 3.24H4.298l13.311 17.403z"/></svg>
+                        </a>
+                        <a href="https://zenn.dev/aoma" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all text-slate-600 hover:text-blue-500" title="Zenn">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19.13 0c.13 0 .25.04.35.12l.06.05 4.34 4.34c.08.08.12.18.12.28 0 .1-.04.2-.12.28l-4.22 4.22c-.2.2-.53.2-.73 0-.2-.2-.2-.53 0-.73l3.35-3.35-3.15-3.15c-.2-.2-.2-.53 0-.73.2-.2.53-.2.73 0l.13.13 3.32 3.32-3.85 3.85-3.32-3.32.13-.13c.2-.2.2-.53 0-.73-.2-.2-.53-.2-.73 0l-3.15 3.15-3.15-3.15c-.2-.2-.53-.2-.73 0-.2.2-.2.53 0 .73l3.35 3.35-3.35 3.35c-.2.2-.2.53 0 .73.2.2.53.2.73 0l3.15-3.15 3.15 3.15c.2.2.53.2.73 0 .2-.2.2-.53 0-.73l-.13-.13 3.32-3.32 3.85 3.85-3.32 3.32.13.13c.2.2.2.53 0 .73-.2.2-.53.2-.73 0l-.13-.13-3.35 3.35.13.13c.2.2.2.53 0 .73-.2.2-.53.2-.73 0l-4.34-4.34a.42.42 0 0 1 0-.6l4.34-4.34c.1-.08.22-.12.35-.12zm-8.26 0c.13 0 .25.04.35.12l4.34 4.34c.16.16.16.44 0 .6l-4.34 4.34a.42.42 0 0 1-.6 0l-4.34-4.34a.42.42 0 0 1 0-.6l4.34-4.34c.09-.08.21-.12.35-.12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </section>
 
             <!-- タイムライン (経歴) -->
             <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
                 <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-6">Timeline</h2>
                 <div class="space-y-8">
-                    <!-- 各項目 -->
-                    <div class="flex gap-4">
-                        <span class="text-sm font-mono text-slate-400 pt-1">2024.04 - now</span>
-                        <div>
-                            <h3 class="font-bold underline decoration-slate-200 underline-offset-4">徳島大学理工学部理工学科光システムコース</h3>
-                            <p class="text-sm text-slate-500 mt-2 italic">-</p>
+                    {timeline.map((item) => (
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 border-l-2 border-slate-100 pl-6 relative">
+                            <div class="absolute w-3 h-3 bg-blue-400 rounded-full -left-[7px] top-1.5 border-2 border-white shadow-sm"></div>
+                            <span class="text-sm font-mono text-slate-400 shrink-0 sm:w-32">{item.period}</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900">{item.title}</h3>
+                                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                                    {item.description}
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </section>
 
             <!-- 成果物 (Projects) -->
             <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
                 <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-6">Projects</h2>
-                <div class="grid gap-6">
-                    <div class="group">
-                        <h3 class="font-bold group-hover:text-blue-500 transition-colors">Owe Manager</h3>
-                        <p class="text-sm text-slate-500 mt-1">使用技術: TypeScript, Next.js, Hono, Cloudflare D1, Drizzle, Cloudflare Workers</p>
-                    </div>
+                
+                <div class="grid gap-10">
+                    {projects.map((project) => (
+                        <button 
+                            class="project-card group flex flex-col md:flex-row gap-6 text-left w-full cursor-pointer hover:bg-white/40 p-4 -m-4 rounded-2xl transition-all"
+                            data-details={JSON.stringify(project)}
+                        >
+                            <div class="w-full md:w-48 h-32 shrink-0 overflow-hidden rounded-xl bg-slate-100 border border-slate-200">
+                                <img 
+                                    src={project.images[0]} 
+                                    alt={project.title} 
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold group-hover:text-blue-500 transition-colors text-xl">
+                                    {project.title}
+                                </h3>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    {project.tech.map(tech => (
+                                        <span class="bg-blue-50 text-blue-600 text-[10px] px-2 py-0.5 rounded-full font-medium">{tech}</span>
+                                    ))}
+                                </div>
+                                <p class="mt-3 text-sm text-slate-600 leading-relaxed line-clamp-2">
+                                    {project.description}
+                                </p>
+                                <span class="inline-block mt-4 text-xs font-bold text-blue-500 group-hover:translate-x-1 transition-transform">
+                                    Read Details →
+                                </span>
+                            </div>
+                        </button>
+                    ))}
                 </div>
             </section>
+
+            <!-- 詳細モーダル -->
+            <dialog id="project-modal" class="p-0 rounded-3xl backdrop:bg-slate-900/50 backdrop:backdrop-blur-sm border-none shadow-2xl max-w-2xl w-[90%] outline-none fixed inset-0 m-auto">
+                <div class="relative bg-white overflow-hidden max-h-[90vh] overflow-y-auto">
+                    <button id="close-modal" class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur shadow-sm hover:bg-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    <div id="modal-content" class="p-0">
+                        <!-- ここにコンテンツを注入します -->
+                    </div>
+                </div>
+            </dialog>
 
             <!-- 記事 (Articles) -->
             <section class="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm border border-white">
@@ -50,9 +156,60 @@ import Layout from '../layouts/Layout.astro';
                     <li>
                         <a href="#" class="text-sm hover:underline text-slate-600 italic">記事１</a>
                     </li>
+                    <li>
+                        <a href="#" class="text-sm hover:underline text-slate-600 italic">記事２</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-sm hover:underline text-slate-600 italic">記事３</a>
+                    </li>
                 </ul>
             </section>
 
         </div>
     </main>
 </Layout>
+
+<script>
+    const modal = document.getElementById('project-modal') as HTMLDialogElement;
+    const modalContent = document.getElementById('modal-content');
+    const closeBtn = document.getElementById('close-modal');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const data = JSON.parse(card.getAttribute('data-details') || '{}');
+            
+            if (modalContent) {
+                modalContent.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-200 border-b border-slate-200">
+                        ${data.images.map((img: string) => `
+                            <img src="${img}" alt="${data.title}" class="w-full h-48 md:h-64 object-cover bg-white" />
+                        `).join('')}
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-3xl font-black text-slate-900">${data.title}</h3>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            ${data.tech.map((t: string) => `<span class="bg-blue-50 text-blue-600 text-xs px-3 py-1 rounded-full font-bold">${t}</span>`).join('')}
+                        </div>
+                        <p class="mt-6 text-slate-600 leading-relaxed text-lg">
+                            ${data.details}
+                        </p>
+                        <div class="mt-8 flex gap-4">
+                            <button class="flex-1 bg-slate-900 text-white rounded-xl py-3 font-bold hover:bg-slate-800 transition-colors">Visit Project</button>
+                        </div>
+                    </div>
+                `;
+            }
+            modal?.showModal();
+        });
+    });
+
+    closeBtn?.addEventListener('click', () => {
+        modal?.close();
+    });
+
+    // モーダルの外側をクリックして閉じる
+    modal?.addEventListener('click', (e) => {
+        if (e.target === modal) modal.close();
+    });
+</script>
