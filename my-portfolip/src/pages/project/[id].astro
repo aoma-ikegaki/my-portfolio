@@ -15,12 +15,18 @@ export async function getStaticPaths() {
         },
         {
             id: "Smart Kanji",
-            title: "Smart Kanji",
+            title: "Smart 幹事",
             tech: ["Python", "Fast API", "TypeScript", "React", "MySQL"],
             description: "幹事の「めんどくさい」をゼロに。日程もお店も、LINEで完結。",
             details: "ハッカソンで開発した、幹事のためのLINEボット「Smart 幹事」。ユーザーはLINE上で日程調整やお店選びを行うだけで、幹事の仕事が完了します。バックエンドはPythonとFast APIで構築し、フロントエンドはReactで実装しました。",
             github: "https://github.com/have4blast/schedule-coordinator-bot",
-            images: ["/smart-kanji.png"]
+            images: [
+                "/smart-kanji.png",
+                "/スクリーンショット 2026-02-28 234412.png",
+                "/スクリーンショット 2026-02-28 235521.png",
+                "/スクリーンショット 2026-02-28 234502.png",
+                "/スクリーンショット 2026-02-28 234518.png"
+            ]
         }
     ];
 
@@ -44,11 +50,81 @@ const { project } = Astro.props;
             </a>
 
             <div class="space-y-12">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-100 rounded-3xl overflow-hidden border border-slate-100 shadow-xl" transition:name={`image-${project.id}`}>
-                    {project.images.map((img: string) => (
-                        <img src={img} alt={project.title} class="w-full h-64 md:h-96 object-cover bg-white" />
-                    ))}
+                <div class="relative group/carousel">
+                    <button id="prev-btn" class="absolute left-4 top-1/2 -track-y-1/2 z-10 p-3 rounded-full bg-white/90 shadow-lg text-slate-800 opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white hover:scale-110 disabled:hidden hidden md:flex border border-slate-100" aria-label="Previous image">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <div id="carousel-track" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth no-scrollbar px-4 -mx-4" transition:name={`image-${project.id}`}>
+                        {project.images.map((img: string) => (
+                            <div class="flex-none w-[85%] md:w-[75%] snap-center">
+                                <div class="rounded-3xl overflow-hidden border border-slate-100 shadow-xl bg-white transition-transform duration-500 hover:scale-[1.01]">
+                                    <img 
+                                        src={img} 
+                                        alt={project.title} 
+                                        class="w-full h-auto aspect-[16/9] object-contain bg-slate-50"
+                                        draggable="false"
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <button id="next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/90 shadow-lg text-slate-800 opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white hover:scale-110 disabled:hidden hidden md:flex border border-slate-100" aria-label="Next image">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    
+                    {/* スクロールを促すヒント（任意） */}
+                    <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white/80 to-transparent pointer-events-none md:hidden"></div>
                 </div>
+
+                <script>
+                    function initCarousel() {
+                        const track = document.getElementById('carousel-track');
+                        const prevBtn = document.getElementById('prev-btn');
+                        const nextBtn = document.getElementById('next-btn');
+
+                        if (!track || !prevBtn || !nextBtn) return;
+
+                        const scrollAmount = track.offsetWidth * 0.8;
+
+                        prevBtn.addEventListener('click', () => {
+                            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                        });
+
+                        nextBtn.addEventListener('click', () => {
+                            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                        });
+
+                        // 最初の画像/最後の画像でボタンを隠す等の制御
+                        const updateButtons = () => {
+                            prevBtn.style.display = track.scrollLeft <= 0 ? 'none' : 'flex';
+                            nextBtn.style.display = 
+                                (track.scrollLeft + track.offsetWidth >= track.scrollWidth - 10) ? 'none' : 'flex';
+                        };
+
+                        track.addEventListener('scroll', updateButtons);
+                        window.addEventListener('resize', updateButtons);
+                        updateButtons();
+                    }
+
+                    // View Transitions 用のライフサイクルイベント
+                    document.addEventListener('astro:page-load', initCarousel);
+                </script>
+
+                <style>
+                    .no-scrollbar::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .no-scrollbar {
+                        -ms-overflow-style: none; /* IE and Edge */
+                        scrollbar-width: none; /* Firefox */
+                    }
+                </style>
 
                 <div class="max-w-2xl mx-auto space-y-8">
                     <div transition:name={`content-${project.id}`}>
