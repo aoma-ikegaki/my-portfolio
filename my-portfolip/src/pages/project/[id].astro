@@ -10,7 +10,7 @@ export async function getStaticPaths() {
             description: "借金の管理をもっとスマートに。シンプルなインターフェースで日々の貸し借りを可視化します。",
             details: "大学生活での小さな貸し借りをストレスなく管理するために制作した「Owe Manager」。「誰に、いくら、いつまでに」返すべきかを明確化し、現在の合計未返済額を一目で把握できます。バックエンドにはCloudflare D1とHonoを採用し、エッジでの高速なレスポンスを実現しています。",
             github: "https://github.com/aoma-ikegaki/owe-manager",
-            link: "https://owe-manager.vercel.app/",
+            link: "https://42dc705f.owe-manager-web.pages.dev/",
             images: ["/owe-manager.png"]
         },
         {
@@ -57,10 +57,10 @@ const { project } = Astro.props;
                         </svg>
                     </button>
 
-                    <div id="carousel-track" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth no-scrollbar px-4 -mx-4" transition:name={`image-${project.id}`}>
-                        {project.images.map((img: string) => (
-                            <div class="flex-none w-[85%] md:w-[75%] snap-center">
-                                <div class="rounded-3xl overflow-hidden border border-slate-100 shadow-xl bg-white transition-transform duration-500 hover:scale-[1.01]">
+                    <div id="carousel-track" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth no-scrollbar" transition:name={`image-${project.id}`}>
+                        {project.images.map((img: string, index: number) => (
+                            <div class={`flex-none w-full md:w-[100%] snap-center flex justify-center ${index === 0 ? 'ml-0' : ''} ${index === project.images.length - 1 ? 'mr-0' : ''}`}>
+                                <div class="w-full rounded-3xl overflow-hidden border border-slate-100 shadow-xl bg-white transition-transform duration-500 hover:scale-[1.01]">
                                     <img 
                                         src={img} 
                                         alt={project.title} 
